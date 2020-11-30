@@ -1,0 +1,11 @@
+rootProject.name = 'health-tracker'
+
+include 'core:core-api'
+include 'core:app'
+
+include 'pic-generator:pic-api'
+include 'pic-generator:app'
+
+include 'telegram-bot'
+
+include 'eureka-server'

@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01
+      author: alexsumin
+      failOnError: true
+      validCheckSum: ANY
+      changes:
+        - sqlFile: { dbms: postgresql, path: changelog/01.create_accounts_measurements_tables.sql, relativeToChangelogFile: true }

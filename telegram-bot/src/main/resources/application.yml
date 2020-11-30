@@ -1,0 +1,19 @@
+
+logging:
+  level:
+    ROOT: INFO
+
+server:
+  port: 8200
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+
+telegram:
+  bot:
+    username: ${BOT_USERNAME}
+    token: ${BOT_TOKEN}

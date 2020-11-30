@@ -24,7 +24,7 @@ class UserRepositoryTest {
 
 
 	@Autowired
-	private AccountRepository repository;
+	private UserRepository repository;
 
 	@DynamicPropertySource
 	static void properties(DynamicPropertyRegistry registry) {

@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.alexsumin.healthtracker.core.domain.entity.User;
-import ru.alexsumin.healthtracker.core.repository.AccountRepository;
+import ru.alexsumin.healthtracker.core.repository.UserRepository;
 import ru.alexsumin.healthtracker.core.service.UserService;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final AccountRepository repository;
+    private final UserRepository repository;
 
     @Override
     @Transactional

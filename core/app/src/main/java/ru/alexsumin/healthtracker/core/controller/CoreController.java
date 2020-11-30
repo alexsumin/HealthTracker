@@ -16,10 +16,7 @@ public class CoreController implements CoreApi {
     @Override
     @PostMapping(path = "v1/user/{id}/measurement")
     public DifferenceDTO addNewMeasurement(@RequestBody MeasurementDTO measurementDTO, @PathVariable("id") Long id) {
-        BigDecimal difference = service.addNewMeasurement(measurementDTO, id);
-        return DifferenceDTO.builder()
-                .value(difference)
-                .build();
+         return service.addNewMeasurement(measurementDTO, id);
     }
 
     @Override

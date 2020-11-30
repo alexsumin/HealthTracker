@@ -27,7 +27,6 @@ public class User {
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(targetEntity = Measurement.class,
             cascade = CascadeType.REMOVE,
-            orphanRemoval = true,
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "user_id", updatable = false)

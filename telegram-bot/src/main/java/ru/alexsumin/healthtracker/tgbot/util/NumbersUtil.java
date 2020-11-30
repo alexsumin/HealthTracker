@@ -7,10 +7,9 @@ import java.math.BigDecimal;
 @UtilityClass
 public class NumbersUtil {
 
-    public String getDifferenceWithSign(BigDecimal firstValue, BigDecimal secondValue) {
-        BigDecimal result = secondValue.subtract(firstValue);
-        if (result.doubleValue() < 0)
-            return "Last change: " + result + " kg.";
-        else return "Last change: +" + result + " kg.";
+    public String getDifferenceWithSign(BigDecimal value) {
+        if (value.doubleValue() < 0)
+            return "Last change: " + value + " kg.";
+        else return "Last change: +" + value + " kg.";
     }
 }

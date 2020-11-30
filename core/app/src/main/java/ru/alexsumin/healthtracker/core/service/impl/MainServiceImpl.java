@@ -4,10 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import ru.alexsumin.healthtracker.core.api.MeasurementDTO;
-import ru.alexsumin.healthtracker.core.api.MeasurementType;
-import ru.alexsumin.healthtracker.core.api.StatDTO;
-import ru.alexsumin.healthtracker.core.api.UserDTO;
+import ru.alexsumin.healthtracker.core.api.*;
 import ru.alexsumin.healthtracker.core.mapper.MeasurementMapper;
 import ru.alexsumin.healthtracker.core.mapper.UserMapper;
 import ru.alexsumin.healthtracker.core.service.MainService;
@@ -16,6 +13,7 @@ import ru.alexsumin.healthtracker.core.service.PicGeneratorService;
 import ru.alexsumin.healthtracker.core.service.UserService;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +27,13 @@ public class MainServiceImpl implements MainService {
     PicGeneratorService picGeneratorService;
 
     @Override
-    public BigDecimal addNewMeasurement(MeasurementDTO newMeasurement, Long id) {
-        return measurementService.addNewAndReturnDifference(
+    public DifferenceDTO addNewMeasurement(MeasurementDTO newMeasurement, Long id) {
+        Optional<BigDecimal> optionalValue = measurementService.addNewAndReturnDifference(
                 measurementMapper.toMeasurement(newMeasurement), id);
+        if (optionalValue.isPresent()) {
+            return DifferenceDTO.builder().value(optionalValue.get()).isFirst(false).build();
+        }
+        return DifferenceDTO.builder().isFirst(true).build();
     }
 
     @Override

@@ -32,7 +32,7 @@ public class MeasurementRepositoryTest {
     private MeasurementRepository measurementRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
@@ -47,7 +47,7 @@ public class MeasurementRepositoryTest {
         User user = new User();
         user.setId(1L);
 
-        accountRepository.save(user);
+        userRepository.save(user);
 
 
         Measurement measurement1 = Measurement.builder()

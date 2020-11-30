@@ -55,11 +55,3 @@ configure(project('app')) {
         useJUnitPlatform()
     }
 }
-
-apply plugin: 'com.palantir.docker'
-
-
-docker {
-    name = "core:${project.version}"
-    files 'app/build/libs/app.jar'
-}

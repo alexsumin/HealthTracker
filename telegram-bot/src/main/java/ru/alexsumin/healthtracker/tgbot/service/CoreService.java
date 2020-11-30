@@ -12,12 +12,12 @@ public class CoreService {
 
     private final CoreApi coreApi;
 
-    public BigDecimal addNewMeasurement(Long chatId, BigDecimal value) {
+    public DifferenceDTO addNewMeasurement(Long chatId, BigDecimal value) {
         var dto = MeasurementDTO.builder()
                 .value(value)
                 .type(MeasurementType.WEIGHT)
                 .build();
-        return coreApi.addNewMeasurement(dto, chatId).getValue();
+        return coreApi.addNewMeasurement(dto, chatId);
     }
 
     public void createUser(Long chatId) {

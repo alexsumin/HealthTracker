@@ -1,0 +1,68 @@
+version: "3.0"
+services:
+  service-discovery:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    privileged: true
+    hostname: service-discovery
+    ports:
+      - "8761:8761"
+    networks:
+      - nw
+  core:
+    build:
+      context: ./core
+      dockerfile: Dockerfile
+    privileged: true
+    hostname: core
+    ports:
+      - "8100:8100"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/database
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - WAIT_FOR=postgres:5432,service-discovery:8761
+      - EUREKA_SERVER=service-discovery
+    networks:
+      - nw
+  pic-generator:
+    build:
+      context: ./pic-generator
+      dockerfile: Dockerfile
+    privileged: true
+    hostname: pic-generator
+    ports:
+      - "8300:8300"
+    environment:
+      - WAIT_FOR=service-discovery:8761
+      - EUREKA_SERVER=service-discovery
+    networks:
+      - nw
+  tg-bot:
+    build:
+      context: ./telegram-bot
+      dockerfile: Dockerfile
+    privileged: true
+    hostname: tg-bot
+    ports:
+      - "8200:8200"
+    environment:
+      - WAIT_FOR=service-discovery:8761
+      - EUREKA_SERVER=service-discovery
+      - BOT_USERNAME=UsernameBotHere
+      - BOT_TOKEN=TokenBotHere
+    networks:
+      - nw
+  postgres:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=database
+    networks:
+      - nw
+networks:
+  nw:

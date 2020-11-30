@@ -1,5 +1,5 @@
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.palantir.docker'
+apply plugin: 'org.springframework.boot'
 
 configurations {
     compileOnly {
@@ -29,6 +29,6 @@ test {
     useJUnitPlatform()
 }
 
-docker {
-    name "${project.name}:${project.version}"
+bootJar {
+    archiveFileName = 'app.jar'
 }

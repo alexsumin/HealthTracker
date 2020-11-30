@@ -10,9 +10,6 @@ configurations {
 	}
 }
 
-apply plugin: 'com.palantir.docker'
-apply plugin: 'com.palantir.docker-run'
-
 configure(subprojects) {
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java'
@@ -73,19 +70,4 @@ configure(project('app')) {
 	test {
 		useJUnitPlatform()
 	}
-}
-
-docker {
-	name = 'picgen:0.0.3'
-	files 'app/build/libs/app.jar'
-	files 'run.sh'
-}
-
-dockerRun {
-	name = "picgen"
-	image "picgen:0.0.3"
-	clean true
-	//todo: service doesn't register in eureka without it
-	//useless for dckr-compose I guess
-	arguments '--network=host'
 }

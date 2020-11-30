@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import ru.alexsumin.healthtracker.core.api.DifferenceDTO;
 import ru.alexsumin.healthtracker.core.api.MeasurementDTO;
 import ru.alexsumin.healthtracker.core.api.MeasurementType;
 import ru.alexsumin.healthtracker.core.api.UserDTO;
@@ -46,7 +47,7 @@ class CoreControllerTest {
     public void addNewMeasurementTest() throws Exception {
         String expected = "42";
         when(mainService.addNewMeasurement(any(), anyLong()))
-                .thenReturn(new BigDecimal(expected));
+                .thenReturn(DifferenceDTO.builder().value(new BigDecimal(expected)).build());
 
         var measurementDTO = MeasurementDTO.builder()
                 .value(new BigDecimal("117"))

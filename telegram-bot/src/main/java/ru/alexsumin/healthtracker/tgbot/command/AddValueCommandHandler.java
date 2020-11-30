@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.NumberUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import ru.alexsumin.healthtracker.core.api.DifferenceDTO;
 import ru.alexsumin.healthtracker.tgbot.model.CommandEnum;
 import ru.alexsumin.healthtracker.tgbot.model.CommandResponse;
 import ru.alexsumin.healthtracker.tgbot.service.CoreService;
@@ -28,15 +29,17 @@ public class AddValueCommandHandler implements CommandHandler {
         Long id = message.getChatId();
         String text = message.getText();
         var value = NumberUtils.parseNumber(text, BigDecimal.class);
-        BigDecimal response = coreService.addNewMeasurement(id, value);
+        DifferenceDTO response = coreService.addNewMeasurement(id, value);
 
         var msgText = new StringBuilder()
                 .append("Well, The new measurement ")
                 .append(text)
                 .append(" kg was added on ")
                 .append(DateUtil.getCurrentDate())
-                .append(".\n")
-                .append(NumbersUtil.getDifferenceWithSign(value, response));
+                .append(".\n");
+        if (!response.getIsFirst()) {
+            msgText.append(NumbersUtil.getDifferenceWithSign(response.getValue()));
+        }
 
         return new CommandResponse(SendMessage
                 .builder()

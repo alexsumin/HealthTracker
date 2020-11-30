@@ -1,10 +1,10 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/testdb
+    url: ${DATABASE_URL}
     driver-class-name: org.postgresql.Driver
     initialization-mode: always
-    username: postgres
-    password: admin
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
 
   jpa:
     generate-ddl: false

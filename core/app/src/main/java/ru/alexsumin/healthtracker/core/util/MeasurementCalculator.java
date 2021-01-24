@@ -7,9 +7,9 @@ import java.math.MathContext;
 
 @Component
 public class MeasurementCalculator {
+    private final MathContext mc = new MathContext(2);
 
     public BigDecimal calcDifference(BigDecimal prev, BigDecimal current) {
-        MathContext mc = new MathContext(2);
         return current.subtract(prev, mc);
     }
 }

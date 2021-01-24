@@ -9,8 +9,8 @@ import ru.alexsumin.healthtracker.core.api.DifferenceDTO;
 import ru.alexsumin.healthtracker.tgbot.model.CommandEnum;
 import ru.alexsumin.healthtracker.tgbot.model.CommandResponse;
 import ru.alexsumin.healthtracker.tgbot.service.CoreService;
-import ru.alexsumin.healthtracker.tgbot.util.DateUtil;
-import ru.alexsumin.healthtracker.tgbot.util.NumbersUtil;
+import ru.alexsumin.healthtracker.tgbot.components.DateFormatter;
+import ru.alexsumin.healthtracker.tgbot.components.NumbersFormatter;
 
 import java.math.BigDecimal;
 
@@ -18,6 +18,8 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class AddValueCommandHandler implements CommandHandler {
     private final CoreService coreService;
+    private final DateFormatter dateFormatter;
+    private final NumbersFormatter numbersFormatter;
 
     @Override
     public CommandEnum type() {
@@ -35,10 +37,10 @@ public class AddValueCommandHandler implements CommandHandler {
                 .append("Well, The new measurement ")
                 .append(text)
                 .append(" kg was added on ")
-                .append(DateUtil.getCurrentDate())
+                .append(dateFormatter.getCurrentDate())
                 .append(".\n");
         if (!response.getIsFirst()) {
-            msgText.append(NumbersUtil.getDifferenceWithSign(response.getValue()));
+            msgText.append(numbersFormatter.getDifferenceWithSign(response.getValue()));
         }
 
         return new CommandResponse(SendMessage

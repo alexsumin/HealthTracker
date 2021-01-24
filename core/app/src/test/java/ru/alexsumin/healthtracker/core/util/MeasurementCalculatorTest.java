@@ -6,15 +6,17 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProjectUtilTest {
+class MeasurementCalculatorTest {
 
     @Test
     public void calcDifferenceTest() {
+        var calculator = new MeasurementCalculator();
+
         var first = new BigDecimal("120");
         var second = new BigDecimal("50");
         var expectedResult = new BigDecimal("-70");
 
-        var result = ProjectUtil.calcDifference(first, second);
+        var result = calculator.calcDifference(first, second);
         assertEquals(expectedResult, result);
     }
 

@@ -2,7 +2,6 @@ package ru.alexsumin.healthtracker.core.domain.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.alexsumin.healthtracker.core.api.MeasurementType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -28,10 +27,6 @@ public class Measurement {
 
     @Column(name = "creation_date")
     LocalDateTime creationDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "data_type")
-    MeasurementType type;
 
     @ManyToOne
     User user;

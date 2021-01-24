@@ -11,6 +11,5 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MeasurementDTO {
-    MeasurementType type;
     BigDecimal value;
 }

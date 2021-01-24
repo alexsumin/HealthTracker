@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.alexsumin.healthtracker.core.api.DifferenceDTO;
 import ru.alexsumin.healthtracker.core.api.MeasurementDTO;
-import ru.alexsumin.healthtracker.core.api.MeasurementType;
 import ru.alexsumin.healthtracker.core.api.UserDTO;
 import ru.alexsumin.healthtracker.core.service.MainService;
 
@@ -51,7 +50,6 @@ class CoreControllerTest {
 
         var measurementDTO = MeasurementDTO.builder()
                 .value(new BigDecimal("117"))
-                .type(MeasurementType.WEIGHT)
                 .build();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/v1/user/1/measurement")

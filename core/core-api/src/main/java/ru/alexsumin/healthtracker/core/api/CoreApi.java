@@ -17,9 +17,9 @@ public interface CoreApi {
     @GetMapping(path = "v1/user/{id}/chart/", produces = MediaType.IMAGE_PNG_VALUE)
     byte[] getChart(@PathVariable("id") Long userId);
 
-    @PostMapping(path = "v1/user/{id}/measurement/{type}/removeLast")
-    void removeLastMeasurement(@PathVariable("id") Long userId, @PathVariable("type") MeasurementType type);
+    @PostMapping(path = "v1/user/{id}/measurement/removeLast")
+    void removeLastMeasurement(@PathVariable("id") Long userId);
 
-    @GetMapping(path = "v1/user/{id}/stat/{type}/")
-    StatDTO stat(@PathVariable("id") Long userId, @PathVariable("type") MeasurementType type);
+    @GetMapping(path = "v1/user/{id}/stat/")
+    StatDTO stat(@PathVariable("id") Long userId);
 }

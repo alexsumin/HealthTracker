@@ -1,12 +1,12 @@
 package ru.alexsumin.healthtracker.core.util;
 
-import lombok.experimental.UtilityClass;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-@UtilityClass
-public class ProjectUtil {
+@Component
+public class MeasurementCalculator {
 
     public BigDecimal calcDifference(BigDecimal prev, BigDecimal current) {
         MathContext mc = new MathContext(2);

@@ -15,7 +15,6 @@ public class CoreService {
     public DifferenceDTO addNewMeasurement(Long chatId, BigDecimal value) {
         var dto = MeasurementDTO.builder()
                 .value(value)
-                .type(MeasurementType.WEIGHT)
                 .build();
         return coreApi.addNewMeasurement(dto, chatId);
     }
@@ -29,10 +28,10 @@ public class CoreService {
     }
 
     public void removeLast(Long chatId) {
-        coreApi.removeLastMeasurement(chatId, MeasurementType.WEIGHT);
+        coreApi.removeLastMeasurement(chatId);
     }
 
     public StatDTO stat(Long chatId) {
-        return coreApi.stat(chatId, MeasurementType.WEIGHT);
+        return coreApi.stat(chatId);
     }
 }

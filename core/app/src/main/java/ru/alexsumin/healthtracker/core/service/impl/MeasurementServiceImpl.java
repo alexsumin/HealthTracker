@@ -3,13 +3,11 @@ package ru.alexsumin.healthtracker.core.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.alexsumin.healthtracker.core.api.MeasurementType;
 import ru.alexsumin.healthtracker.core.domain.entity.Measurement;
-import ru.alexsumin.healthtracker.core.repository.UserRepository;
 import ru.alexsumin.healthtracker.core.repository.MeasurementRepository;
 import ru.alexsumin.healthtracker.core.service.MeasurementService;
 import ru.alexsumin.healthtracker.core.service.UserService;
-import ru.alexsumin.healthtracker.core.util.ProjectUtil;
+import ru.alexsumin.healthtracker.core.util.MeasurementCalculator;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +18,7 @@ import java.util.Optional;
 public class MeasurementServiceImpl implements MeasurementService {
     private final MeasurementRepository repository;
     private final UserService userService;
+    private final MeasurementCalculator calc;
 
     @Transactional
     @Override
@@ -31,7 +30,7 @@ public class MeasurementServiceImpl implements MeasurementService {
         var saved = repository.save(measurement);
 
         if (usersLastMeasurement != null) {
-            return Optional.of(ProjectUtil.calcDifference(usersLastMeasurement.getData(), saved.getData()));
+            return Optional.of(calc.calcDifference(usersLastMeasurement.getData(), saved.getData()));
         }
         return Optional.empty();
     }
@@ -43,16 +42,16 @@ public class MeasurementServiceImpl implements MeasurementService {
 
     @Transactional
     @Override
-    public void removeUsersLastMeasurement(Long id, MeasurementType type) {
-        repository.removeLast(id, type.toString());
+    public void removeUsersLastMeasurement(Long id) {
+        repository.removeLast(id);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public BigDecimal stat(Long id, MeasurementType type) {
+    public BigDecimal stat(Long id) {
         //todo: one query? stored procedure?
-        BigDecimal first = repository.findFirst(id, type.toString());
-        BigDecimal last = repository.findLast(id, type.toString());
+        BigDecimal first = repository.findFirst(id);
+        BigDecimal last = repository.findLast(id);
 
         return first.subtract(last);
     }

@@ -1,12 +1,12 @@
-package ru.alexsumin.healthtracker.tgbot.util;
+package ru.alexsumin.healthtracker.tgbot.components;
 
-import lombok.experimental.UtilityClass;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@UtilityClass
-public class DateUtil {
+@Component
+public class DateFormatter {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM");
 
     public String getCurrentDate() {

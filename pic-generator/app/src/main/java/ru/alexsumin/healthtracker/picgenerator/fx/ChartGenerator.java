@@ -95,7 +95,7 @@ public class ChartGenerator extends Application {
                                 minY, maxY, tick
                         ));
 
-                final XYChart.Series<String, Number> series = new XYChart.Series<>();
+                final var series = new XYChart.Series<String, Number>();
                 pairs.forEach(pair -> series.getData().add(new XYChart.Data<>(formatter.format(pair.getDate()), pair.getValue())));
 
                 chart.getData().add(series);

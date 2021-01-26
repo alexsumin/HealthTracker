@@ -21,23 +21,23 @@ public interface MeasurementRepository extends JpaRepository<Measurement, Long> 
     @Query(value = "DELETE FROM measurements " +
             "WHERE id = (SELECT id " +
             "            FROM   measurements " +
-            "            WHERE user_id=:id AND data_type=:type " +
+            "            WHERE user_id=:id " +
             "            ORDER  BY id DESC " +
             "            LIMIT  1);", nativeQuery = true)
-    void removeLast(@Param("id") Long id, @Param("type")String type);
+    void removeLast(@Param("id") Long id);
 
     @Query(value = "SELECT data " +
             "            FROM  measurements " +
-            "            WHERE user_id=:id AND data_type=:type " +
+            "            WHERE user_id=:id " +
             "            ORDER  BY id ASC " +
             "            LIMIT  1;", nativeQuery = true)
-    BigDecimal findFirst(@Param("id") Long id, @Param("type")String type);
+    BigDecimal findFirst(@Param("id") Long id);
 
     @Query(value = "SELECT data " +
             "            FROM  measurements " +
-            "            WHERE user_id=:id AND data_type=:type " +
+            "            WHERE user_id=:id " +
             "            ORDER  BY id DESC " +
             "            LIMIT  1;", nativeQuery = true)
-    BigDecimal findLast(@Param("id") Long id, @Param("type")String type);
+    BigDecimal findLast(@Param("id") Long id);
 
 }

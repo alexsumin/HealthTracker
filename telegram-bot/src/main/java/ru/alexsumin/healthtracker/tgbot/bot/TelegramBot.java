@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.alexsumin.healthtracker.tgbot.model.CommandResponse;
-import ru.alexsumin.healthtracker.tgbot.service.TgFacade;
+import ru.alexsumin.healthtracker.tgbot.service.CommandHandlerManager;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
-    private final TgFacade tgFacade;
+    private final CommandHandlerManager handlerManager;
     @Value("${telegram.bot.username}")
     private String botUsername;
     @Value("${telegram.bot.token}")
@@ -25,7 +25,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if (update.hasMessage()) {
             Message message = update.getMessage();
-            var commandResponse = tgFacade.handleMessage(message);
+            var commandResponse = handlerManager.handleMessage(message);
             sendResponse(commandResponse);
         }
     }

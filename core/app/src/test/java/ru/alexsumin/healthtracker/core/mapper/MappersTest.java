@@ -7,14 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import ru.alexsumin.healthtracker.core.api.MeasurementDTO;
-import ru.alexsumin.healthtracker.core.api.MeasurementType;
 import ru.alexsumin.healthtracker.core.api.UserDTO;
 import ru.alexsumin.healthtracker.core.domain.entity.Measurement;
 import ru.alexsumin.healthtracker.core.domain.entity.User;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = MappersTest.MapperTestConfig.class)
 public class MappersTest {
@@ -51,18 +51,12 @@ public class MappersTest {
         assertNotNull(measurementMapper);
 
         final BigDecimal value = new BigDecimal("42");
-        MeasurementDTO source = MeasurementDTO.builder()
-                .type(MeasurementType.WEIGHT)
+        var source = MeasurementDTO.builder()
                 .value(value)
                 .build();
 
         Measurement result = measurementMapper.toMeasurement(source);
 
-        //only mapped fields
-        Assertions.assertThat(result)
-                .usingRecursiveComparison()
-                .ignoringExpectedNullFields()
-                .isEqualTo(source);
+        assertEquals(source.getValue(), result.getData());
     }
-
 }

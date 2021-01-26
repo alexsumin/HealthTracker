@@ -10,9 +10,8 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import ru.alexsumin.healthtracker.core.domain.entity.User;
 import ru.alexsumin.healthtracker.core.domain.entity.Measurement;
-import ru.alexsumin.healthtracker.core.api.MeasurementType;
+import ru.alexsumin.healthtracker.core.domain.entity.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -53,21 +52,18 @@ public class MeasurementRepositoryTest {
         Measurement measurement1 = Measurement.builder()
                 .user(user)
                 .data(new BigDecimal("15"))
-                .type(MeasurementType.WEIGHT)
                 .creationDate(LocalDateTime.now().minusDays(5L))
                 .build();
 
         Measurement measurement2 = Measurement.builder()
                 .user(user)
                 .data(new BigDecimal("20"))
-                .type(MeasurementType.WEIGHT)
                 .creationDate(LocalDateTime.now().minusDays(3L))
                 .build();
 
         Measurement measurement3 = Measurement.builder()
                 .user(user)
                 .data(new BigDecimal("25"))
-                .type(MeasurementType.WEIGHT)
                 .creationDate(LocalDateTime.now())
                 .build();
 

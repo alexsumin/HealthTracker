@@ -20,7 +20,7 @@ import java.util.Set;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TgFacade {
+public class CommandHandlerManager {
 
     private final Set<CommandHandler> handlersSet;
     private final CommandResolver resolver;
@@ -41,6 +41,7 @@ public class TgFacade {
         return command.execute(message);
     }
 
+    @SuppressWarnings("unused")
     public CommandResponse defaultFallback(Message message, Throwable throwable) {
         log.error(throwable.getMessage(), throwable);
         return new CommandResponse(SendMessage

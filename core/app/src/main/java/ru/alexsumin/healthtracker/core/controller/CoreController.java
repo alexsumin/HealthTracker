@@ -32,14 +32,14 @@ public class CoreController implements CoreApi {
     }
 
     @Override
-    @PostMapping(path = "v1/user/{id}/measurement/{type}/removeLast")
-    public void removeLastMeasurement(@PathVariable("id") Long userId, @PathVariable("type") MeasurementType type) {
-        service.removeLastMeasurement(userId, type);
+    @PostMapping(path = "v1/user/{id}/measurement/removeLast")
+    public void removeLastMeasurement(@PathVariable("id") Long userId) {
+        service.removeLastMeasurement(userId);
     }
 
     @Override
-    @GetMapping(path = "v1/user/{id}/stat/{type}/")
-    public StatDTO stat(@PathVariable("id") Long userId, @PathVariable("type") MeasurementType type) {
-        return service.stat(userId, type);
+    @GetMapping(path = "v1/user/{id}/stat/")
+    public StatDTO stat(@PathVariable("id") Long userId) {
+        return service.stat(userId);
     }
 }

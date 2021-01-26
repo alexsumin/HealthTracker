@@ -47,14 +47,14 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public void removeLastMeasurement(Long userID, MeasurementType type) {
-        measurementService.removeUsersLastMeasurement(userID, type);
+    public void removeLastMeasurement(Long userID) {
+        measurementService.removeUsersLastMeasurement(userID);
     }
 
     @Override
-    public StatDTO stat(Long userId, MeasurementType type) {
+    public StatDTO stat(Long userId) {
         return StatDTO.builder()
-                .totalDifference(measurementService.stat(userId, type))
+                .totalDifference(measurementService.stat(userId))
                 .build();
     }
 }
